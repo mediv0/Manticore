@@ -14,16 +14,18 @@ class Manticore {
         this._duration = null;
         //
         this._firstFrame = null;
-        this._validAnimations = {
-            transform: (left, top) => { this._element.style.transform = `translate3d(${left}px, ${top}px, 0)`; },
-            opacity: (opacity) => { this._element.style.opacity = opacity ; }
-        }
     }
 
-    setBaseAnimationValues(element, duration, easing) {
+    setBaseAnimationValues(element, duration, ease) {
         this._element = element;
         this._duration = duration;
-        this._easing = easing;
+
+        if(easing[ease]) {
+            this._easing = ease;
+        } else {
+            this._easing = "easeInOutSine";
+            console.warn(`Invalid easing function name. swithing to default easing method. ease: ${easing || "no-name-provided"} not found`)
+        }
     }
 
     setTarget(target) {
@@ -48,7 +50,7 @@ class Manticore {
         // change rate percentage
         const elapsedRate = elapsed / this._duration;
         // add easing curve
-        const easingCurve = easing.easeInOutCubic(elapsedRate);
+        const easingCurve = easing[this._easing](elapsedRate);
         // pixleChangeRate
         const pixleChange =  Math.min(easingCurve, 1);
 
@@ -69,7 +71,6 @@ class Manticore {
         const animationEndingOptions = {
             left: element.offsetLeft,
             top: element.offsetTop,
-            opacity: getComputedStyle(element).getPropertyValue("opacity"),
         };
 
         // set base options
@@ -78,7 +79,6 @@ class Manticore {
         const from = {
             left: opts.left,
             top: opts.top,
-            opacity: opts.opacity,
         };
         
         requestAnimationFrame(timestamp => {
