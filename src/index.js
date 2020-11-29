@@ -20,16 +20,22 @@ class Manticore {
         this._element = element;
         this._duration = duration;
 
-        if(easing[ease]) {
+        if (easing[ease]) {
             this._easing = ease;
         } else {
             this._easing = "easeInOutSine";
-            console.warn(`Invalid easing function name. swithing to default easing method. ease: ${easing || "no-name-provided"} not found`)
+            console.warn(
+                `Invalid easing function name. swithing to default easing method. ease: ${
+                    easing || "no-name-provided"
+                } not found`
+            );
         }
     }
 
     setTarget(target) {
-        return variableType(target) === "String" ? (target = document.querySelector(target)) : (target);
+        return variableType(target) === "String"
+            ? (target = document.querySelector(target))
+            : target;
     }
 
     calculateTween(startPosition, pixleChangeRate) {
@@ -52,7 +58,7 @@ class Manticore {
         // add easing curve
         const easingCurve = easing[this._easing](elapsedRate);
         // pixleChangeRate
-        const pixleChange =  Math.min(easingCurve, 1);
+        const pixleChange = Math.min(easingCurve, 1);
 
         // execute animations
         const _left = this.calculateTween(from.left, pixleChange);
@@ -80,11 +86,10 @@ class Manticore {
             left: opts.left,
             top: opts.top,
         };
-        
-        requestAnimationFrame(timestamp => {
+
+        requestAnimationFrame((timestamp) => {
             this.animate.call(this, timestamp, from, animationEndingOptions);
         });
-        
     }
 }
 
