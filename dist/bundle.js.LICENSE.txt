@@ -1,0 +1,7 @@
+/*!
+ * /*!
+ *  * Manticore v0.1.0
+ *  * (c) 2020 Mahdi Fakhr(mediv0)
+ *  * @license MIT
+ *  * /
+ */
