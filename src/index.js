@@ -9,7 +9,6 @@ class Manticore {
         Manticore.instance = this;
 
         // base variables
-        this._diff = null;
         this._element = null;
         this._easing = null;
         this._duration = null;
@@ -29,27 +28,6 @@ class Manticore {
 
     setTarget(target) {
         return variableType(target) === "String" ? (target = document.querySelector(target)) : (target);
-    }
-
-    diff(from, to) {
-        const _diff = {
-            transform: {
-                left: -1,
-                top: -1,
-            },
-            opacity: -1,
-        };
-        if(from.left >= to.left) {
-            _diff.transform.left = from.left;
-        }
-        if(from.top >= to.top) {
-            _diff.transform.top = from.top;
-        }
-        if(from.opacity < to.opacity) {
-            _diff.opacity = from.opacity;
-        }
-
-        return _diff;
     }
 
     calculateTween(startPosition, pixleChangeRate) {
@@ -97,19 +75,12 @@ class Manticore {
         // set base options
         this.setBaseAnimationValues(element, opts.duration * 1000, opts.easing);
 
-        // move element to start position
-        //this.moveElement(element, opts);
-        // ....
-
         const from = {
             left: opts.left,
             top: opts.top,
             opacity: opts.opacity,
         };
-        this._diff = this.diff(from, animationEndingOptions);
-        console.log(this._diff);
         
-
         requestAnimationFrame(timestamp => {
             this.animate.call(this, timestamp, from, animationEndingOptions);
         });
