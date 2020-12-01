@@ -19,6 +19,7 @@ class Manticore {
     setBaseAnimationValues(element, duration, ease) {
         this._element = element;
         this._duration = duration;
+        this._firstFrame = null;
 
         if (easing[ease]) {
             this._easing = ease;
@@ -50,7 +51,6 @@ class Manticore {
 
     animate(timestamp, from, to) {
         !this._firstFrame && (this._firstFrame = timestamp);
-
         // remaining time to calculate
         const elapsed = timestamp - this._firstFrame;
         // change rate percentage
@@ -59,6 +59,7 @@ class Manticore {
         const easingCurve = easing[this._easing](elapsedRate);
         // pixleChangeRate
         const pixleChange = Math.min(easingCurve, 1);
+
 
         // execute animations
         const _left = this.calculateTween(from.left, pixleChange);
