@@ -1,5 +1,5 @@
 # Manticore
-🎨 Simple animation library for vue-phalanx
+🎨 Simple animation library ,gsap.from clone
 
 # [click for demo](https://codesandbox.io/s/gallant-platform-5g873?file=/index.html)
 
@@ -8,7 +8,7 @@
 </p>
 
 
-#### 🚨 note: `this package is built to handle vue-phalanx animations.`
+#### 🚨 note: `This package is for test purposes.`
 
 > The manticore is a Persian legendary creature similar to the Egyptian sphinx.
 
