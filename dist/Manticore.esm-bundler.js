@@ -1,5 +1,5 @@
 /*!
- * Manticore v0.1.0
+ * Manticore v0.1.1
  * (c) 2020 Mahdi Fakhr
  * @license MIT
  */
@@ -53,6 +53,7 @@ var Manticore = function Manticore(opts) {
 Manticore.prototype.setBaseAnimationValues = function setBaseAnimationValues (element, duration, ease) {
     this._element = element;
     this._duration = duration;
+    this._firstFrame = null;
 
     if (easing$1[ease]) {
         this._easing = ease;
@@ -84,7 +85,6 @@ Manticore.prototype.animate = function animate (timestamp, from, to) {
         var this$1 = this;
 
     !this._firstFrame && (this._firstFrame = timestamp);
-
     // remaining time to calculate
     var elapsed = timestamp - this._firstFrame;
     // change rate percentage
@@ -93,6 +93,7 @@ Manticore.prototype.animate = function animate (timestamp, from, to) {
     var easingCurve = easing$1[this._easing](elapsedRate);
     // pixleChangeRate
     var pixleChange = Math.min(easingCurve, 1);
+
 
     // execute animations
     var _left = this.calculateTween(from.left, pixleChange);

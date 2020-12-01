@@ -1,6 +1,6 @@
 {
   "name": "@mediv0/manticore",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "description": "🎨 Simple animation library for vue-phalanx",
   "author": "Mahdi Fakhr",
