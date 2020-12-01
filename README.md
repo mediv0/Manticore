@@ -12,6 +12,10 @@
 
 > The manticore is a Persian legendary creature similar to the Egyptian sphinx.
 
+```bash
+npm i @mediv0/manticore
+```
+
 ## usage: 
 ```javascript
         import Manticore from "@mediv0/manticore";
